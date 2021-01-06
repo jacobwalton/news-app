@@ -1,0 +1,32 @@
+.container {
+  color: rgb(80, 80, 80);
+  display: flex;
+  text-align: center;
+}
+
+.content {
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  text-decoration: underline;
+}
+
+.cases {
+  color: rgb(138, 138, 255);
+}
+
+.deaths {
+  color: rgb(255, 108, 108);
+}
+
+.recovered {
+  color: rgb(57, 219, 57);
+}
+
+.stats {
+  font-style: italic;
+  opacity: 70%;
+  margin-top: -20px;
+}
