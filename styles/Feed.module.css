@@ -1,0 +1,45 @@
+.main {
+  display: flex;
+  margin-top: 50px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description {
+  font-size: 14px;
+  background-color: rgb(236, 236, 236);
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.post {
+  width: 500px;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid black;
+}
+.post img {
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.post h1 {
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+.paginator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.paginator div {
+  margin: 25px;
+}
+.paginator .active {
+  cursor: pointer;
+}
+.paginator .disabled {
+  cursor: not-allowed;
+  color: rgb(179, 179, 179);
+}

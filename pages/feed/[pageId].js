@@ -1,52 +1,89 @@
-import styles from '../../styles/Feed.module.css'
+import { useRouter } from "next/router";
+import {Toolbar} from '../../components/toolbar'
+import styles from "../../styles/Feed.module.css";
 export const Feed = ({ pageNumber, articles }) => {
-    console.log(articles, pageNumber)
-    return (
-    <div className={StyleSheet.main}>
+  const router = useRouter();
+
+  return (
+    <div className="page-container">
+        <Toolbar />
+      <div className={styles.main}>
         {articles.map((article, index) => (
-           <div key={index} className={styles.post}>
-               <h1>{article.title}</h1>
-               <p>{article.description}</p>
-               {!!article.urlToImage && <img src={article.urlToImage} />}
-           </div> 
+          <div key={index} className={styles.post}>
+            <h1 onClick={() => window.open(article.url, "_blank")}>
+              {article.title}
+            </h1>
+            <p className={styles.description}>{article.description}</p>
+            {!!article.urlToImage && (
+              <img
+                src={article.urlToImage}
+                onClick={() => window.open(article.url, "_blank")}
+              />
+            )}
+          </div>
         ))}
-    </div>)
+      </div>
+      <div className={styles.paginator}>
+        <div
+          onClick={() => {
+            if (pageNumber > 1) {
+              router.push(`./${pageNumber - 1}`).then(()=> window.scrollTo(0,0));
+            }
+          }}
+          className={pageNumber === 1 ? styles.disabled : styles.active}
+        >
+          Previous Page
+        </div>
+        <div>Page {pageNumber}</div>
+        <div
+          onClick={() => {
+            if (pageNumber < 5) {
+              router.push(`./${pageNumber + 1}`).then(()=> window.scrollTo(0,0));
+            }
+          }}
+          className={pageNumber === 5 ? styles.disabled : styles.active}
+        >
+          Next Page
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export const getServerSideProps = async pageContext => {
-    const pageNumber = pageContext.query.pageId;
+export const getServerSideProps = async (pageContext) => {
+  const pageNumber = pageContext.query.pageId;
 
-    if (!pageNumber || pageNumber <1 || pageNumber >5){
-        return {
-            props:{
-                articles: [],
-                pageNumber: 1,
-            }
-        }
+  if (!pageNumber || pageNumber < 1 || pageNumber > 5) {
+    return {
+      props: {
+        articles: [],
+        pageNumber: 1,
+      },
+    };
+  }
+
+  const apiResponse = await fetch(
+    `https://newsapi.org/v2/top-headlines?country=us&pageSize=5&page=${pageNumber}`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
+      },
     }
+  );
 
-    const apiResponse = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&pageSize=5&page=${pageNumber}`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
-          },
-        },
-      );
-      
-        const apiJSON = await apiResponse.json();
+  const apiJSON = await apiResponse.json();
 
-        const { articles } = apiJSON;
+  const { articles } = apiJSON;
 
-        return {
-            props: {
-              articles,
-              pageNumber: Number.parseInt(pageNumber),
-            },
-          };
+  return {
+    props: {
+      articles,
+      pageNumber: Number.parseInt(pageNumber),
+    },
+  };
 
-    //   .then(res => res.json());
-    
-    //   const { articles } = apiResponse;    
+  //   .then(res => res.json());
+
+  //   const { articles } = apiResponse;
 };
 export default Feed;
