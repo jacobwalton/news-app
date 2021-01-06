@@ -1,8 +1,9 @@
 import styles from "../styles/COVID.module.css";
+
 import numeral from "numeral";
 import { Toolbar } from "../components/toolbar";
 
-export const COVID = ({ covidStats, covidStories }) => {
+export const COVID = ({ covidStats, articles }) => {
   console.log(covidStats);
   return (
     <div>
@@ -62,7 +63,22 @@ export const COVID = ({ covidStats, covidStories }) => {
       <div className={styles.containerRight}>
         <h1 className={styles.header}>Covid Stories</h1>
         <strong>Latest Covid Stories: </strong>
-        {/* {covidStories.totalResults} */}
+        <div className={styles.main}>
+        {articles.map((article, index) => (
+          <div key={index} className={styles.post}>
+            <h1 onClick={() => window.open(article.url, "_blank")}>
+              {article.title}
+            </h1>
+            <p className={styles.description}>{article.description}</p>
+            {!!article.urlToImage && (
+              <img
+                src={article.urlToImage}
+                onClick={() => window.open(article.url, "_blank")}
+              />
+            )}
+          </div>
+        ))}
+      </div>
       </div>
     </div>
     </div>
@@ -71,16 +87,26 @@ export const COVID = ({ covidStats, covidStories }) => {
 
 export async function getServerSideProps() {
   const statsRes = await fetch("https://disease.sh/v3/covid-19/all");
-  const storiesRes = await fetch(
-"https://newsapi.org/v2/top-headlines?q=covid&country=us&apiKey=77c81c6b62ac4734be89f776f6b1264b"  );
+  const apiResponse = await fetch(
+    `https://newsapi.org/v2/top-headlines?country=us&q=covid&pageSize=5`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWS_KEY}`,
+      },
+    }
+  );
+
+  const apiJSON = await apiResponse.json();
+
+  const { articles } = apiJSON;
 
   const covidStats = await statsRes.json();
-  const covidStories = await storiesRes.json();
+  // const covidStories = await storiesRes.json();
 
   return {
     props: {
       covidStats,
-      covidStories
+      articles,
     },
   };
 };

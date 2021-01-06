@@ -8,9 +8,10 @@ export default function Home() {
   <Toolbar />
 
     <div className={styles.main}>
-        <h1>News App</h1>
+      
+        <h1 className={styles.header}>News App</h1>
 
-        <h3>Latest news!</h3>
+        <h5 className={styles.subtitle}>Check out the latest stories from around the country and keep up with all the latest COVID numbers and news!</h5>
       </div>
    </div>
    );
