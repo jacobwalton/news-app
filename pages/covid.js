@@ -1,5 +1,5 @@
 import styles from "../styles/COVID.module.css";
-
+import Head from 'next/head';
 import numeral from "numeral";
 import { Toolbar } from "../components/toolbar";
 

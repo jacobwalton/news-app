@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from "next/router";
 import {Toolbar} from '../../components/toolbar'
 import styles from "../../styles/Feed.module.css";
@@ -5,6 +6,12 @@ export const Feed = ({ pageNumber, articles }) => {
   const router = useRouter();
 
   return (
+    <>
+    <Head>
+    <meta property="og:image" content={articles[0]?.urlToImage} />
+    <meta property="og:description" content={articles[0]?.description} />
+    <meta property="og:title" content={articles[0]?.title + ' and more!'} />
+  </Head>
     <div className="page-container">
         <Toolbar />
       <div className={styles.main}>
@@ -47,6 +54,7 @@ export const Feed = ({ pageNumber, articles }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
