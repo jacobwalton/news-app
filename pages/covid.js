@@ -1,10 +1,14 @@
 import styles from "../styles/COVID.module.css";
 import numeral from "numeral";
+import { Toolbar } from "../components/toolbar";
 
 export const COVID = ({ covidStats, covidStories }) => {
   console.log(covidStats);
   return (
+    <div>
+    <Toolbar />
     <div className={styles.container}>
+      
       <div className={styles.containerLeft}>
         <div className={styles.content}>
           <h1 className={styles.header}>Covid Updates</h1>
@@ -56,10 +60,11 @@ export const COVID = ({ covidStats, covidStories }) => {
         </div>
       </div>
       <div className={styles.containerRight}>
-        <h1 className={styles.header}>Covid Resources/Stories</h1>
-        <strong>Latest Covid Story: </strong>
+        <h1 className={styles.header}>Covid Stories</h1>
+        <strong>Latest Covid Stories: </strong>
         {/* {covidStories.totalResults} */}
       </div>
+    </div>
     </div>
   );
 };

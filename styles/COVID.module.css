@@ -8,20 +8,21 @@
   padding-top: 20px;
   flex-shrink: 1;
   background-image: linear-gradient(
-    to right,
-    rgb(201, 201, 201),
-    rgb(236, 235, 235)
+    to top,
+    rgb(204, 204, 204),
+    rgb(240, 240, 240)
   );
 }
 
 .containerRight {
   padding-top: 20px;
-  background-color: rgb(236, 235, 235);
+  background-color: rgb(240, 240, 240);
   flex-grow: 3;
+  text-align: center;
 }
 
 .content {
-  padding: 20px;
+  padding: 10px;
 }
 
 .header {
@@ -57,7 +58,7 @@
     flex-grow: 2;
     background-image: linear-gradient(
       to bottom,
-      rgb(201, 201, 201),
+      rgb(255, 255, 255),
       rgb(236, 235, 235)
     );
   }

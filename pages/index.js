@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 export default function Home() {
   return (
   <div className='page-container'> 
+  
   <Toolbar />
 
     <div className={styles.main}>
