@@ -2,6 +2,18 @@
   color: #646464;
   display: flex;
   justify-content: space-between;
+  animation: slide-in 0.3s ease-in;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translate(0%, 10%) rotate(3deg);
+    opacity: 0%;
+  }
+  to {
+    transform: translate(0%, 0%) rotate(0deg);
+    opacity: 100%;
+  }
 }
 
 .containerLeft {
