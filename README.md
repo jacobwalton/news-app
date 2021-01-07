@@ -5,7 +5,7 @@
 
 ## Description:
 
-An easy to use application which allows the user to create and delete notes.
+An easy to use application which allows the user to view the latest news.
 
 _Deployed here via Vercel:_ https://news-app-dun.vercel.app/
 
