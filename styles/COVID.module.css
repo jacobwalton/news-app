@@ -7,11 +7,11 @@
 
 @keyframes slide-in {
   from {
-    transform: translate(0%, 10%) rotate(3deg);
+    transform: translate(0%, 10%);
     opacity: 0%;
   }
   to {
-    transform: translate(0%, 0%) rotate(0deg);
+    transform: translate(0%, 0%);
     opacity: 100%;
   }
 }
